@@ -1,0 +1,14 @@
+{
+  "name": "learner",
+  "version": "1.0.0",
+  "description": "For learning how to discord bot",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sothingguy",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.4.1"
+  }
+}
