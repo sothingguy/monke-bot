@@ -9,6 +9,14 @@
   "author": "Sothingguy",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.4.1"
-  }
+    "discord.js": "^12.5.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sothingguy/LearnerBot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sothingguy/LearnerBot/issues"
+  },
+  "homepage": "https://github.com/sothingguy/LearnerBot#readme"
 }
