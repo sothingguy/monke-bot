@@ -23,10 +23,13 @@ client.on('message', message => {
 
 		// Joining the channel and creating a VoiceConnection.
 		message.member.voice.channel.join().then(VoiceConnection => {
-			// Playing the music, and, on finish, disconnecting the bot.
+			// get list of all sounds
 			const files = require('./ape/content.json');
+
+			// get exact fiule including path
 			const file = files.files[Math.floor(Math.random() * files.files.length)];
-			console.log(file);
+
+			// play actual sound
 			VoiceConnection.play(file).on("finish", () => VoiceConnection.disconnect());
 			message.reply("Playing...");
 		}).catch(e => console.log(e))
