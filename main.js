@@ -1,36 +1,39 @@
-const Discord = require('discord.js');
-const {token} = require('./token.json');
-const prefix = "!";
+const Discord = require('discord.js'); // get discord js package
+const {token} = require('./token.json'); // get token from external file
+const prefix = "~"; // the text used at the start of comands
+const fs = require('fs');
 
 const client = new Discord.Client();
+client.commands = new Discord.Collection();
+
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+
+	// set a new item in the Collection
+	// with the key as the command name and the value as the exported module
+	client.commands.set(command.name, command);
+}
 
 client.once('ready', () => {
-	console.log("Learner bot is online!");
-	client.user.setActivity("With my robot cock"); 
+	console.log("Monke bot is online!"); // loggin that the bot has started to console
+	client.user.setActivity("with my robot cock");  // changing the status of the bot
 });
 
 client.on('message', message => {
-	if(!message.content.startsWith(prefix) || message.author.bot) return;
+	if(!message.content.startsWith(prefix) || message.author.bot) return; // make sure that the message is for the bot
 
-	if (message.content === `${prefix}ping`) {
-		message.channel.send('pong.');
-	} else if (message.content === `${prefix}avatar`) {
-		message.channel.send(message.author.displayAvatarURL());
-	} else if (message.content === `${prefix}ape`) { // make monkey noises
-		// Checking if the message author is in a voice channel.
-		if (!message.member.voice.channel) return message.reply("You must be in a voice channel.");
+	const args = message.content.slice(prefix.length).trim().split(/ +/); // splits the message into seperate words
+	const command = args.shift().toLowerCase(); // takes the first word which is the command
 
-		// Joining the channel and creating a VoiceConnection.
-		message.member.voice.channel.join().then(VoiceConnection => {
-			// get list of all sounds
-			const files = require('./ape/content.json');
+	if (!client.commands.has(command)) return; // cheeck to seee if the comand is actually a comand
 
-			// get exact fiule including path
-			const file = files.files[Math.floor(Math.random() * files.files.length)];
-
-			// play actual sound
-			VoiceConnection.play(file).on("finish", () => VoiceConnection.disconnect());
-		}).catch(e => console.log(e))
+	try {
+		client.commands.get(command).execute(message, args);
+	} catch (error) {
+		console.error(error);
+		message.reply('there was an error trying to execute that command!');
 	}
 });
 
