@@ -11,6 +11,7 @@ def getStatus():
     data["current"] = "0"
     data["total"] = "0"
     data["queue"] = "0"
+    data["time"] = "null"
 
     response = requests.get('https://www.battlemetrics.com/servers/rust/1830848') # the url for the server
     html = response.text
@@ -63,6 +64,7 @@ def getStatus():
     now = datetime.now()
 
     current_time = now.strftime("%H:%M:%S")
+    data["time"] = current_time
 
     print("current", data["current"], "total", data["total"], "queue", data["queue"], "Last cheecked at:", current_time)
 
