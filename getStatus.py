@@ -1,17 +1,15 @@
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
-import json
 import schedule
 import time
 
 def getStatus():
     # setting up json
-    data = {}
-    data["current"] = "0"
-    data["total"] = "0"
-    data["queue"] = "0"
-    data["time"] = "null"
+    current = 0
+    total = 0
+    queue = 0
+    time = "null"
 
     response = requests.get('https://www.battlemetrics.com/servers/rust/1830848') # the url for the server
     html = response.text
@@ -27,7 +25,7 @@ def getStatus():
 
         for x in range(len(players)):
             if (players[x] == "<"):
-                data["current"] = players[:x] # current players
+                current = players[:x] # current players
                 players = players[x:]
                 break
 
@@ -35,7 +33,7 @@ def getStatus():
 
         for x in range(len(players)):
             if (players[x] == "<"):
-                data["total"] = players[:x] # total players
+                total = players[:x] # total players
                 players = players[x:]
                 break
 
@@ -43,33 +41,31 @@ def getStatus():
 
         for x in range(len(players)):
             if (players[x] == "<"):
-                data["queue"] = players[:x] # players in the queue
+                queue = players[:x] # players in the queue
                 players = players[x:]
                 break
     else:
         players = players[4:]
         for x in range(len(players)):
             if (players[x] == "/"):
-                data["current"] = players[:x] # players in the queue
+                current = players[:x] # players in the queue
                 players = players[x:]
                 break
         
         players = players[1:]
         for x in range(len(players)):
             if (players[x] == "<"):
-                data["total"] = players[:x] # players in the queue
+                total = players[:x] # players in the queue
                 players = players[x:]
                 break
 
     now = datetime.now()
 
     current_time = now.strftime("%H:%M:%S")
-    data["time"] = current_time
 
-    print("current", data["current"], "total", data["total"], "queue", data["queue"], "Last cheecked at:", current_time)
-
-    with open('commands/rustStatus.json', 'w') as outfile:
-        json.dump(data, outfile)
+    file = open('commands/rustStatus.txt', 'w')
+    file.write(str("Currently there are " + current + "/" + total + " people playing with " + queue + " people waiting in the queue. This was at " + current_time))
+    file.close()
 
 schedule.every(2).minutes.do(getStatus)
 
