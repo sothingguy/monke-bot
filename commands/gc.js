@@ -10,7 +10,7 @@ module.exports = {
 		message.member.voice.channel.join().then(VoiceConnection => {
 
 			// play actual audio
-			VoiceConnection.play("./sounds/gc.mp3");
+			VoiceConnection.play("./sounds/gc.mp3").on("finish", () => VoiceConnection.disconnect());
 		})
 	},
 };
