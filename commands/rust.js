@@ -3,7 +3,7 @@ module.exports = {
 	description: 'gives amount of players on rust server',
 	execute(message, args) {
 		const fs = require('fs');
-		fs.readFile('commands/rustStatus.txt', (err, data) => { 
+		fs.readFile('commands/rustStatus/rustStatus.txt', (err, data) => { 
 			if (err) throw err; 
 			
 			message.reply(data.toString());

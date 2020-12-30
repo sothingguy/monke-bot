@@ -9,10 +9,10 @@ module.exports = {
 		// Joining the channel and creating a VoiceConnection.
 		message.member.voice.channel.join().then(VoiceConnection => {
 			// get list of all ape sounds
-			const sounds = fs.readdirSync('./bigLez').filter(file => file.endsWith('.mp3'));
+			const sounds = fs.readdirSync('./sounds/bigLez').filter(file => file.endsWith('.mp3'));
 
 			// play actual sound
-			VoiceConnection.play("./bigLez/" + sounds[Math.floor(Math.random() * sounds.length)]).on("finish", () => VoiceConnection.disconnect());;
+			VoiceConnection.play("./sounds/bigLez/" + sounds[Math.floor(Math.random() * sounds.length)]);
 		})
 	},
 };
