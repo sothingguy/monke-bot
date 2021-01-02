@@ -18,10 +18,13 @@ def getElement(url):
     html = response.text
     soup = BeautifulSoup(html, 'lxml') #makes readable
 
-    element = soup.find_all('dd') # finds all <dd> tags
-    element = str(element[1]) # gets the one with the amount of element
-    
-    return element
+    element = soup.find_all('dt') # finds all <dd> tags
+    for x in range(len(element)):
+        text = str(element[x])
+        if (text == '<dt>Player count</dt>'):
+            element = soup.find_all('dd')
+            element = str(element[x])
+            return element
 
 def findNumbers(element):
     # setting up json
@@ -101,7 +104,6 @@ def main(): # main function
 
 if __name__ == '__main__': # run commands
     main()
-
     schedule.every(2).minutes.do(main) # shedual to run every 2 mins
 
     while 1: # sleep while the sheduel waits
