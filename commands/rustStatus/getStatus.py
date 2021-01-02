@@ -11,7 +11,10 @@ def getUrl(): #gets the specific url for the server to get the status off
     return url
 
 def getElement(url):
-    response = requests.get(url) # the url for the server
+    try: # try to get url and eror if there was one
+        response = requests.get(url) # the url for the server
+    except:
+        return "error" # return "error" to tell rest of program there was an error
     html = response.text
     soup = BeautifulSoup(html, 'lxml') #makes readable
 
@@ -26,7 +29,6 @@ def findNumbers(element):
     total = "0"
     queue = "0"
     time = "null"
-
     if (len(element) > 50):
         #sorts to find the specific numbers
         element = element[10:]
@@ -71,20 +73,29 @@ def findNumbers(element):
 
     return data
 
-def output(data):
-    now = datetime.now() # get date and time
-
-    current_time = now.strftime("%H:%M") # take just time section
-
-    print("Currently there are " + data[0] + "/" + data[1] + " people playing with " + data[2] + " people waiting in the queue. This was at " + current_time) # print out for testing/log
-    
+def output(data, error = False):
     f = open('commands/rustStatus/rustStatus.txt', 'w') #open text file to output to
-    f.write(str("Currently there are " + data[0] + "/" + data[1] + " people playing with " + data[2] + " people waiting in the queue. This was at " + current_time)) #write to file
+    
+    now = datetime.now() # get date and time
+    current_time = now.strftime("%H:%M") # take just time section
+    
+    if (error): # if there was an error trying to get the url
+        print(data + current_time)
+        f.write(data + current_time) #write to file
+    else:
+        f = open('commands/rustStatus/rustStatus.txt', 'w') #open text file to output to
+
+        print("Currently there are " + data[0] + "/" + data[1] + " people playing with " + data[2] + " people waiting in the queue. This was at " + current_time) # print out for testing/log
+        
+        f.write(str("Currently there are " + data[0] + "/" + data[1] + " people playing with " + data[2] + " people waiting in the queue. This was at " + current_time)) #write to file
     f.close() # close file
 
 def main(): # main function
     url = getUrl() # run at the start of script for testing
     element = getElement(url)
+    if (element == "error"): # detect if there is an error in getting the url
+        output(url + " is not a valid url ", error = True) # sends error message to be displayed if there was an error
+        return
     data = findNumbers(element)
     output(data)
 
