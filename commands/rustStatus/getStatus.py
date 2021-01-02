@@ -4,6 +4,12 @@ from datetime import datetime
 import schedule
 import time
 
+def getUrl(): #gets the specific url for the server to get the status off
+    f = open("commands/rustStatus/url.txt")
+    url = str(f.read()) #reads url file
+    f.close() # close file
+    return url
+
 def getElement(url):
     response = requests.get(url) # the url for the server
     html = response.text
@@ -72,12 +78,12 @@ def output(data):
 
     print("Currently there are " + data[0] + "/" + data[1] + " people playing with " + data[2] + " people waiting in the queue. This was at " + current_time) # print out for testing/log
     
-    file = open('commands/rustStatus/rustStatus.txt', 'w') #open text file to output to
-    file.write(str("Currently there are " + data[0] + "/" + data[1] + " people playing with " + data[2] + " people waiting in the queue. This was at " + current_time)) #write to file
-    file.close() # close file
+    f = open('commands/rustStatus/rustStatus.txt', 'w') #open text file to output to
+    f.write(str("Currently there are " + data[0] + "/" + data[1] + " people playing with " + data[2] + " people waiting in the queue. This was at " + current_time)) #write to file
+    f.close() # close file
 
 def main(): # main function
-    url = 'https://www.battlemetrics.com/servers/rust/1830848' # run at the start of script for testing
+    url = getUrl() # run at the start of script for testing
     element = getElement(url)
     data = findNumbers(element)
     output(data)
