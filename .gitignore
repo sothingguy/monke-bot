@@ -1,3 +1,4 @@
 token.json
 node_modules/
-commands/rustStatus/rustStatus.txt
+commands/rustStatus.json
+commands/minecraftStatus.json
