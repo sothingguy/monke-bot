@@ -1,9 +1,9 @@
 module.exports = {
-	name: 'rust',
-	description: 'gives amount of players on rust server',
+	name: 'minecraft',
+	description: 'gives amount of players on minecraft server',
 	execute(message, args) {
 		const fs = require('fs');
-		fs.readFile('commands/rustStatus.json', (err, data) => {
+		fs.readFile('commands/minecraftStatus.json', (err, data) => {
 			if (err) throw err;
 			let rust = JSON.parse(data);
 			for (i = 0; i < rust.length; i++) {
@@ -11,7 +11,7 @@ module.exports = {
 					if(rust[i].error){
 						message.reply(rust[i].url + " is not a valid url please change this with ~rustarget **url**");
 					} else {
-						message.reply("Currently there are " + rust[i].data[0] + "/" + rust[i].data[1] + " people playing with " + rust[i].data[2] + " people waiting in the queue. This was at " + rust[i].time);
+						message.reply("Currently there are " + rust[i].data[0] + "/" + rust[i].data[1] + " people playing. This was at " + rust[i].time);
 					};
 					return
 				};
