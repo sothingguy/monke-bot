@@ -10,7 +10,6 @@ module.exports = {
         } else {
             image = 'https://source.unsplash.com/random/' + args[0] + 'x' + args[0];
         }
-        const attachment = new MessageAttachment(image);
-        message.channel.send(attachment);
+        message.channel.send(image);
 	},
 };
