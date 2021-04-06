@@ -3,7 +3,7 @@ module.exports = {
 	description: 'sends link to random yoututbe video with almost no views',
 	execute(message, args) {
         const fs = require('fs');
-		fs.readFile('commands/randomVid.json', (err, data) => {
+		fs.readFile('commands/webFiles/randomVid.json', (err, data) => {
 			if (err) throw err;
 			let link = JSON.parse(data);
             link = link['link']

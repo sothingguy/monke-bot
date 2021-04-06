@@ -3,7 +3,7 @@ module.exports = {
 	description: 'gives amount of players on minecraft server',
 	execute(message, args) {
 		const fs = require('fs');
-		fs.readFile('commands/minecraftStatus.json', (err, data) => {
+		fs.readFile('commands/webFiles/minecraftStatus.json', (err, data) => {
 			if (err) throw err;
 			let rust = JSON.parse(data);
 			for (i = 0; i < rust.length; i++) {

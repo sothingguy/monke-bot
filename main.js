@@ -5,15 +5,19 @@ const fs = require('fs');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+const commandFolders = fs.readdirSync('./commands');
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
+for (const folder of commandFolders) {
+	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js')); // for cheecking each indavidual comand folder
+	for (const file of commandFiles) {
+		const command = require(`./commands/${folder}/${file}`);
 
-	// set a new item in the Collection
-	// with the key as the command name and the value as the exported module
-	client.commands.set(command.name, command);
+		// set a new item in the Collection
+		// with the key as the command name and the value as the exported module
+		client.commands.set(command.name, command);
+	}
 }
 
 client.once('ready', () => {
@@ -22,6 +26,7 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
+	if (message.channel.id == "828954310972145714" && message.author.id != '777823804209889280') {message.channel.send(parseFloat(message.content) + 1);};
 	if(!message.content.startsWith(prefix) || message.author.bot) return; // make sure that the message is for the bot
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/); // splits the message into seperate words
