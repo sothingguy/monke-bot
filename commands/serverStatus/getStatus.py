@@ -86,35 +86,7 @@ def output(numbers, error, out):
     out['time'] = current_time # set current date and time in json
     print(error, numbers, current_time, out['url'], out['id'])
 
-def randomVid():
-    url = "https://petittube.com/" # url to target
-    try: # try to get url and eror if there was one
-        response = requests.get(url) # the url for the server
-    except:
-        return "error" # return "error" to tell rest of program there was an error
-    html = response.text
-    soup = BeautifulSoup(html, 'lxml') #makes readable
-
-    element = soup.find_all('iframe') # gets the html element
-    element = element[0] # gets the first iframe
-    element = element['src'] # gets the url
-
-    # shrotens to just video code
-    element = element[30:]
-    element = element[:11]
-
-    # raw youtube video code
-    code = element
-
-    ytLink = {}
-    #ytlink["link"] = "0"
-    ytLink["link"] = 'https://www.youtube.com/watch?v=' + code # add code to url
-    print(ytLink['link']) # output to log
-    with open('commands/other/randomVid.json', 'w') as outfile: # output to json file for discord bot
-        json.dump(ytLink, outfile)
-
 def main(): # main function
-    randomVid() # run the code to get a random video url for the other comands
 
     jsonFile = 'commands/serverStatus/rustStatus.json' # set what file the json data is in
     data = getUrl(jsonFile) # gets json file
