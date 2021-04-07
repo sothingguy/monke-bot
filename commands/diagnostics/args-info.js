@@ -1,6 +1,7 @@
 module.exports = {
-	name: 'aprs-info',
-	description: 'returns comand and the arguments given -used for testing',
+	name: 'args-info',
+	description: 'Returns arguments given with the command - used for testing.',
+	usage: '~args-info [args]',
 	execute(message, args) {
 		if (!args.length) {
 			return message.channel.send(`You didn't provide any arguments, ${message.author}!`);

@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'avatar',
-	description: 'returns clients profile picture',
+	description: 'Returns authors profile picture.',
+	usage: '~avatar',
 	execute(message, args) {
 		message.channel.send(message.author.displayAvatarURL());
 	},

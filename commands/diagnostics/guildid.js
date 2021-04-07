@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'guildid',
-	description: 'gives the id for the discord server',
+	description: 'Gives the id for the discord server.',
+	usage: '~guildid',
 	execute(message, args) {
 		message.channel.send(message.guild.id);
 	},

@@ -110,13 +110,13 @@ def randomVid():
     #ytlink["link"] = "0"
     ytLink["link"] = 'https://www.youtube.com/watch?v=' + code # add code to url
     print(ytLink['link']) # output to log
-    with open('commands/webFiles/randomVid.json', 'w') as outfile: # output to json file for discord bot
+    with open('commands/other/randomVid.json', 'w') as outfile: # output to json file for discord bot
         json.dump(ytLink, outfile)
 
 def main(): # main function
     randomVid() # run the code to get a random video url for the other comands
 
-    jsonFile = 'commands/webFiles/rustStatus.json' # set what file the json data is in
+    jsonFile = 'commands/serverStatus/rustStatus.json' # set what file the json data is in
     data = getUrl(jsonFile) # gets json file
 
     for servers in range(len(data)):
@@ -134,7 +134,7 @@ def main(): # main function
     with open(jsonFile, 'w') as outfile: # writes to json file
         json.dump(data, outfile)
     
-    jsonFile = 'commands/webFiles/minecraftStatus.json' # set what file the json data is in
+    jsonFile = 'commands/serverStatus/minecraftStatus.json' # set what file the json data is in
     data = getUrl(jsonFile) # gets json file
 
     for servers in range(len(data)):

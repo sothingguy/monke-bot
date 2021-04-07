@@ -1,11 +1,8 @@
 module.exports = {
 	name: 'test',
-	description: 'used for testing',
+	description: 'Used for testing commands, outputs to console.',
+	usage: '~test',
 	execute(message, args) {
-		//console.log(message.guild.members);
-		const list = message.guild; 
-		console.log(list);
-
-		list.members.fetch().then(members => console.log(members))
+		message.reply("sneaky bugger")
 	},
 };

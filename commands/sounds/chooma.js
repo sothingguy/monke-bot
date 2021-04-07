@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'chooma',
-	description: 'Plays chooma sound',
+	description: 'Plays a random chooma sound.',
+	usage: '~chooma',
 	execute(message, args) {
         const fs = require('fs');
 		// Checking if the message author is in a voice channel.

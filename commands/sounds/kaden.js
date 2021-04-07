@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'kaden',
-	description: 'plays kaden sound maybe earape',
+	description: 'Plays kaden sound, 1 in 3 chance of being earape.',
+	usage: '~kaden',
 	execute(message, args) {
         const fs = require('fs');
 		// Checking if the message author is in a voice channel.

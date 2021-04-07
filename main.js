@@ -24,7 +24,7 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-	if (message.channel.id == "828954310972145714" && message.author.id != '777823804209889280') {message.channel.send(parseFloat(message.content) + 1);};
+	//if (message.channel.id == "828954310972145714" && message.author.id != '777823804209889280') {message.channel.send(parseFloat(message.content) + 1);};
 	if(!message.content.startsWith(prefix) || message.author.bot) return; // make sure that the message is for the bot
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/); // splits the message into seperate words

@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'gc',
-	description: 'plays good cunt compilation',
+	description: 'Plays good cunt compilation from The Big Lez show.',
+	usage: '~gc',
 	execute(message, args) {
         const fs = require('fs');
 		// Checking if the message author is in a voice channel.
