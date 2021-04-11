@@ -72,4 +72,13 @@ B| | | |
 --------
 C| | | |
 --------
+
+Dose user have a game runninng
+	yes:
+	are there any arguments
+		yes:
+		cheeck argumnets
+		make users move
+no:
+
 */
