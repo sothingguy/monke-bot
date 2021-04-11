@@ -79,6 +79,42 @@ Dose user have a game runninng
 		yes:
 		cheeck argumnets
 		make users move
-no:
+		make ai move
+		show game
+		save json
+	no args:
+		just show game mkae nto shwo json
+no game running:
+	args:
+		yes:
+		"start game"
+		cheeck arguments
+		make user move
+		make ai move
+		show game
+		save json
+	no args:
+		"start game"
+		show game
+		save json
 
+function:
+	cheek args
+	make users move  
+	make ai move
+
+game running:
+	args:
+	function
+	no args:
+	no save
+no game running:
+	args:
+	start game
+	function
+	no args:
+	start game
+
+save json
+show game
 */
