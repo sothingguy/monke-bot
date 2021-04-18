@@ -10,13 +10,16 @@ def getElement(url):
     html = response.text
     soup = BeautifulSoup(html, 'lxml') #makes readable
 
-    name = soup.find("h2", {"class": "css-u0fcdd"}).get_text() # gets the name of the server
-    long = True
-    while long: # shortens any spaces that end up coming after the name of the server
-        name = name[:len(name)-1]
-        if (name[len(name)-1] == "C"):
-            name = name[:len(name)-2]
-            long = False
+    name = soup.find("h2").get_text() # gets the name of the server
+    try:
+        long = True
+        while long: # shortens any spaces that end up coming after the name of the server
+            name = name[:len(name)-1]
+            if (name[len(name)-1] == "C"):
+                name = name[:len(name)-2]
+                long = False
+    except:
+        name = soup.find("h2").get_text()
 
     element = soup.find_all('dt') # finds all <dd> tags
     for x in range(len(element)):
@@ -85,5 +88,6 @@ def main(url): # main function
 
 if __name__ == '__main__': # run commands
     output = main(sys.argv[1])
-    #output = main("https://www.battlemetrics.com/servers/rust/6195010")
+    #output = main("https://www.battlemetrics.com/servers/minecraft/5873087") #minecraft
+    #output = main("https://www.battlemetrics.com/servers/rust/6324892") #rust
     print(output)
