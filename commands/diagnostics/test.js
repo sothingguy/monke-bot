@@ -54,7 +54,7 @@ module.exports = {
 				// cheeck if somone has won randomly choose point to put cross then cheeck if somone has won
 			};
 			if(msS[1]){ //send
-				toSend = toSend + "\n   |1|2|3|\nA|" + info.A[0] + "|" + info.A[1] + "|" + info.A[2] + "|\nB |" + info.B[0] + "|" + info.B[1] + "|" + info.B[2] + "|\nC|" + info.C[0] + "|" + info.C[1] + "|" + info.C[2] + "|"
+				toSend = toSend + "\n:white_large_square::one::two::three:\n:regional_indicator_a:" + info.A[0] + info.A[1] + info.A[2] + "\n:regional_indicator_b:" + info.B[0] + info.B[1] + info.B[2] + "\n:regional_indicator_c:" + info.C[0] + info.C[1] + info.C[2]
 				message.channel.send(toSend);
 			};
 			if(msS[2]){ //save
@@ -72,6 +72,10 @@ B| | | |
 --------
 C| | | |
 --------
+:white_large_square: :one: :two: :three: 
+:regional_indicator_a: :white_large_square: :regional_indicator_x: :regional_indicator_o:
+:regional_indicator_b: :white_large_square: :regional_indicator_x: :regional_indicator_o:
+:regional_indicator_c: :white_large_square: :regional_indicator_x: :regional_indicator_x:
 
 Dose user have a game runninng
 	yes:

@@ -1,5 +1,4 @@
 token.json
 node_modules/
-commands/serverStatus/rustStatus.json
-commands/serverStatus/minecraftStatus.json
+commands/serverStatus/gameStatus.json
 commands/other/random.jpg

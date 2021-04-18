@@ -3,21 +3,37 @@ module.exports = {
 	description: 'Gives amount of players on rust server inclusing queued players.',
 	usage: '~rust',
 	execute(message, args) {
+		const {spawn} = require('child_process');
 		const fs = require('fs');
-		fs.readFile('commands/serverStatus/rustStatus.json', (err, data) => {
+		fs.readFile('commands/serverStatus/gameStatus.json', (err, data) => {
 			if (err) throw err;
-			let rust = JSON.parse(data);
-			for (i = 0; i < rust.length; i++) {
-				if(rust[i].id == message.guild.id){
-					if(rust[i].error){
-						message.reply(rust[i].url + " is not a valid url please change this with ~rustarget **url**");
+			let info = JSON.parse(data);
+			for (i = 0; i < info.length; i++) {
+				if(info[i].id == message.guild.id){
+					if(info[i].rust){
+						try {
+							var dataToSend;
+							// spawn new child process to call the python script
+							const python = spawn('python', ['./commands/serverStatus/getStatus.py', info[i].rust]);
+							// collect data from script
+							python.stdout.on('data', function (data) {
+								dataToSend = data.toString();
+							});
+							// in close event we are sure that stream from child process is closed
+							python.on('close', (code) => {
+								// send data to browser
+								message.channel.send(dataToSend);
+							});
+						} catch(err) {
+							message.channel.send("oOp");
+						}
 					} else {
-						message.reply("Currently there are " + rust[i].data[0] + "/" + rust[i].data[1] + " people playing with " + rust[i].data[2] + " people waiting in the queue. This was at " + rust[i].time);
+						message.channel.send("There is currently no url linked with your discord server please set one with ~rustarget *url*");
 					};
 					return
 				};
-				if (i == rust.length - 1) {
-					message.reply("There is currently no url linked with your discord server please set one with ~rustarget **url**");
+				if (i == info.length - 1) {
+					message.channel.send("There is currently no url linked with your discord server please set one with ~rustarget *url*");
 				};
 			};
 		});

@@ -1,15 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime
-import schedule
-import time
-import json
-
-def getUrl(file): # opens the json file to get the urls from and output to
-    f = open(file,)
-    data = json.load(f)
-    f.close()
-    return data # returns the files data
+import sys
 
 def getElement(url):
     try: # try to get url and eror if there was one
@@ -19,13 +10,21 @@ def getElement(url):
     html = response.text
     soup = BeautifulSoup(html, 'lxml') #makes readable
 
+    name = soup.find("h2", {"class": "css-u0fcdd"}).get_text() # gets the name of the server
+    long = True
+    while long: # shortens any spaces that end up coming after the name of the server
+        name = name[:len(name)-1]
+        if (name[len(name)-1] == "C"):
+            name = name[:len(name)-2]
+            long = False
+
     element = soup.find_all('dt') # finds all <dd> tags
     for x in range(len(element)):
         text = str(element[x])
         if (text == '<dt>Player count</dt>'):
             element = soup.find_all('dd')
             element = str(element[x])
-            return element
+            return element, name
 
 def findNumbers(element):
     # setting up json
@@ -33,7 +32,7 @@ def findNumbers(element):
     total = "0"
     queue = "0"
     time = "null"
-    if (len(element) > 50):
+    if (len(element) > 50): # tells if there is a queue or not
         #sorts to find the specific numbers
         element = element[10:]
 
@@ -77,56 +76,14 @@ def findNumbers(element):
 
     return data
 
-def output(numbers, error, out):
-    out['error'] = error
-    out['data'] = numbers # set the output numbers in json
-
-    now = datetime.now() # get date and time
-    current_time = now.strftime("%H:%M") # take just time section
-    out['time'] = current_time # set current date and time in json
-    print(error, numbers, current_time, out['url'], out['id'])
-
-def main(): # main function
-
-    jsonFile = 'commands/serverStatus/rustStatus.json' # set what file the json data is in
-    data = getUrl(jsonFile) # gets json file
-
-    for servers in range(len(data)):
-        error = False # sets there to have eben no error yet
-        server = data[servers] # gets specific server from the list of servers
-        url = server['url'] # gets urls
-        element = getElement(url) # gets element from url
-        if (element == "error"): # detect if there is an error in getting the url
-            error = True # sets error to true and numbers to 0
-            numbers = [0,0,0]
-        else:
-            numbers = findNumbers(element)
-        output(numbers, error, server) # outputs int to data to be put into json file
-    
-    with open(jsonFile, 'w') as outfile: # writes to json file
-        json.dump(data, outfile)
-    
-    jsonFile = 'commands/serverStatus/minecraftStatus.json' # set what file the json data is in
-    data = getUrl(jsonFile) # gets json file
-
-    for servers in range(len(data)):
-        error = False # sets there to have eben no error yet
-        server = data[servers] # gets specific server from the list of servers
-        url = server['url'] # gets urls
-        element = getElement(url) # gets element from url
-        if (element == "error"): # detect if there is an error in getting the url
-            error = True # sets error to true and numbers to 0
-            numbers = [0,0,0]
-        else:
-            numbers = findNumbers(element)
-        output(numbers, error, server) # outputs int to data to be put into json file
-    
-    with open(jsonFile, 'w') as outfile: # writes to json file
-        json.dump(data, outfile)
+def main(url): # main function
+    element = getElement(url)
+    if element[0] == "e":
+        return "There was an error while getting the player count, maybe the url is dead, cheeck with ~*game*target"
+    numbers = findNumbers(element[0])
+    return element[1] + ": " + numbers[0] + "/" + numbers[1] + " (" + numbers[2] + ")"
 
 if __name__ == '__main__': # run commands
-    main()
-    schedule.every(2).minutes.do(main) # shedual to run every 2 mins
-    while 1: # sleep while the sheduel waits
-        schedule.run_pending()
-        time.sleep(1)
+    output = main(sys.argv[1])
+    #output = main("https://www.battlemetrics.com/servers/rust/6195010")
+    print(output)
