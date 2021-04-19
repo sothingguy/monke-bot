@@ -65,25 +65,31 @@ module.exports = {
 					if (!args.length) { // if there are no args
 						game = info[x];
 						message.reply("Here is our game so far:");
+                        break
 					}else if(args.length == 2){ // if there are args
 						game = info[x];
 						doShit(args, game);
+                        break
 					} else {
 						game = info[x];
-						message.reply("I may be smart but im not that smart.")
+						message.reply("I may be smart but im not that smart.");
+                        break
 					};
 				}else if (x == info.length - 1) { // if there isnt a game for this user
 					if (!args.length) { // if there arnt any args
 						info.push({"id" : message.author.id, "A": [":white_large_square:", ":white_large_square:", ":white_large_square:"], "B": [":white_large_square:", ":white_large_square:", ":white_large_square:"], "C": [":white_large_square:", ":white_large_square:", ":white_large_square:"]});
 						game = info[parseFloat(x)+1];
 						message.reply("**Game Started!**\nTo play type the same comand with a number/letter coordinate.\ni.e **~xo 2 B** to go in the centre\ndo ~xo to see the board again");
+                        break
 					}else if(args.length == 2){ // if there are args
 						info.push({"id" : message.author.id, "A": [":white_large_square:", ":white_large_square:", ":white_large_square:"], "B": [":white_large_square:", ":white_large_square:", ":white_large_square:"], "C": [":white_large_square:", ":white_large_square:", ":white_large_square:"]});
 						game = info[parseFloat(x)+1];
 						doShit(args, game);
+                        break
 					} else {
 						game = info[parseFloat(x)+1];
-						message.reply("I may be smart but im not that smart.")
+						message.reply("I may be smart but im not that smart.");
+                        break
 					};
 				};
 			};
