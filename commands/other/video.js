@@ -6,7 +6,7 @@ module.exports = {
         const {spawn} = require('child_process');
 		var dataToSend;
 		// spawn new child process to call the python script
-		const python = spawn('python', ['./commands/other/randomvid.py']);
+		const python = spawn('python3', ['./commands/other/randomvid.py']);
 		// collect data from script
 		python.stdout.on('data', function (data) {
 			dataToSend = data.toString();

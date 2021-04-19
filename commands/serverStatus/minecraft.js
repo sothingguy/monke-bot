@@ -14,7 +14,7 @@ module.exports = {
 						try {
 							var dataToSend;
 							// spawn new child process to call the python script
-							const python = spawn('python', ['./commands/serverStatus/getStatus.py', info[i].minecraft]);
+							const python = spawn('python3', ['./commands/serverStatus/getStatus.py', info[i].minecraft]);
 							// collect data from script
 							python.stdout.on('data', function (data) {
 								dataToSend = data.toString();
