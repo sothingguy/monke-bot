@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'xo',
-	description: 'Norts and crosses game, use ~xo to start playing.',
+	description: 'Norts and crosses game, use ~xo to start playing. Do ~xo 2 B for a move, the bot imediatly dose its move.',
 	usage: '~xo or ~xo 2 B',
 	execute(message, args) {
 		const fs = require('fs');
