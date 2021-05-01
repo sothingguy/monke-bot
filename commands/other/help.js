@@ -2,6 +2,7 @@ module.exports = {
 	name: 'help',
 	description: 'Sends list of commands or infomation about a specific command.',
 	usage: '~help or ~help [command]',
+	op: '0',
 	execute(message, args) {
         const fs = require('fs'); // fs library
 

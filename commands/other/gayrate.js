@@ -2,6 +2,7 @@ module.exports = {
 	name: 'gayrate',
 	description: 'Rates how gay the sender or specified thing is.',
 	usage: '~gayrate or ~gayrate [thing]',
+	op: '0',
 	execute(message, args) {
         if (!args.length) {
 			rated = message.member.user.tag;

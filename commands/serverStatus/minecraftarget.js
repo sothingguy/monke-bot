@@ -2,6 +2,7 @@ module.exports = {
 	name: 'minecraftarget',
 	description: 'Allows you to cheeck or change the minecraft server targeted by ~minecraft. Has to be a link to https://www.battlemetrics.com/servers/minecraft website.',
 	usage: '~minecraftarget or ~minecraftarget [url]',
+	op: '1',
 	execute(message, args) {
         const fs = require('fs');
         if (!args.length) {

@@ -2,6 +2,7 @@ module.exports = {
 	name: 'image',
 	description: 'Sends a random image of a specific size.',
 	usage: '~iamge or ~image 200 300',
+	op: '0',
 	execute(message, args) {
         const fs = require('fs')
         const request = require('request')

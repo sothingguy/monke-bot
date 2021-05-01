@@ -2,6 +2,7 @@ module.exports = {
 	name: 'ape',
 	description: 'Playes a random monkey sound.',
 	usage: '~ape',
+	op: '0',
 	execute(message, args) {
         const fs = require('fs');
 		// Checking if the message author is in a voice channel.

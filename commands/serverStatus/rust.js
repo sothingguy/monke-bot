@@ -2,6 +2,7 @@ module.exports = {
 	name: 'rust',
 	description: 'Gives amount of players on rust server inclusing queued players.',
 	usage: '~rust',
+	op: '0',
 	execute(message, args) {
 		const {spawn} = require('child_process');
 		const fs = require('fs');

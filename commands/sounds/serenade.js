@@ -2,6 +2,7 @@ module.exports = {
 	name: 'serenade',
 	description: 'Indian man singing, idek what the name is.',
 	usage: '~serenade',
+	op: '0',
 	execute(message, args) {
         const fs = require('fs');
 		// Checking if the message author is in a voice channel.

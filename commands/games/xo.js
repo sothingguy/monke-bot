@@ -2,6 +2,7 @@ module.exports = {
 	name: 'xo',
 	description: 'Norts and crosses game, use ~xo to start playing. Do ~xo 2 B for a move, the bot imediatly dose its move.',
 	usage: '~xo or ~xo 2 B',
+	op: '0',
 	execute(message, args) {
 		const fs = require('fs');
 		fs.readFile('commands/games/xo.json', (err, data) => {

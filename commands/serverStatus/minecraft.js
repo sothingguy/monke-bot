@@ -2,6 +2,7 @@ module.exports = {
 	name: 'minecraft',
 	description: 'Gives amount of players on minecraft server.',
 	usage: '~minecraft',
+	op: '0',
 	execute(message, args) {
 		const {spawn} = require('child_process');
 		const fs = require('fs');

@@ -41,3 +41,15 @@ client.on('message', message => {
 });
 
 client.login(token);
+
+/*
+module.exports = {
+	name: '', // name of the command - same as file name and as command entered by end user
+	description: '', // brief description of teh comand
+	usage: '', // usage example
+	op: '0', // the opp level required to use this command 0-anyone 1-mods 2-admins
+	execute(message, args) {
+		// code goes here
+	}
+};
+*/

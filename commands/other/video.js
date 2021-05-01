@@ -2,6 +2,7 @@ module.exports = {
 	name: 'video',
 	description: 'Sends link to random youtube video with almost no views.',
 	usage: '~video',
+	op: '0',
 	execute(message, args) {
         const {spawn} = require('child_process');
 		var dataToSend;

@@ -12,7 +12,8 @@
     "@discordjs/opus": "^0.3.3",
     "discord.js": "^12.5.1",
     "ffmpeg-static": "^4.2.7",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "ytdl-core": "^4.5.0"
   },
   "repository": {
     "type": "git",

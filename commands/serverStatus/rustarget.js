@@ -2,6 +2,7 @@ module.exports = {
 	name: 'rustarget',
 	description: 'Allows you to cheeck or change the rust server targeted by ~rust. Has to be a link to https://www.battlemetrics.com/servers/rust website.',
 	usage: '~rustarget or ~rustarget [url]',
+	op: '1',
 	execute(message, args) {
         const fs = require('fs');
         if (!args.length) {

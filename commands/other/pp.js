@@ -2,6 +2,7 @@ module.exports = {
 	name: 'pp',
 	description: 'Tells the user a pp length.',
 	usage: '~pp',
+	op: '0',
 	execute(message, args) {
         len = message.author.id[message.author.id[0]]
         text = "=";
