@@ -10,7 +10,7 @@ module.exports = {
 
         var url;
         // spawn new child process to call the python script
-        const python = spawn('python', ['./commands/sounds/randSong.py']);
+        const python = spawn('python3', ['./commands/sounds/randSong.py']);
         // collect data from script
         python.stdout.on('data', function (data) {
             url = data.toString();
