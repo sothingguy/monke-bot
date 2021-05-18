@@ -17,5 +17,8 @@ module.exports = {
 			// send data to browser
 			message.channel.send(dataToSend);
 		});
+		python.on("error", (err) => {
+			message.channel.send("An error has occurred.");
+		});
 	},
 };

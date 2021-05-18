@@ -31,5 +31,8 @@ module.exports = {
                 VoiceConnection.play(stream, {seek: 0, volume: 1}).on("finish", () => VoiceConnection.disconnect());
             })
         });
+        python.on("error", (err) => {
+            message.channel.send("An error has occurred.");
+        });
 	}
 };
