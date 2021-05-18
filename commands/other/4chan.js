@@ -13,12 +13,14 @@ module.exports = {
             } else {
                 toSend = toSend + "\nTitle: " + thread["sub"]
             };
-            if (thread["com"].length + toSend.length > 1990) {
-                toSend = toSend + "\nContent (This user has a fair bit to say to the content has been cut short):\n"
-            }else {
-                toSend = toSend + "\nContent:\n"
-            };
-            toSend = toSend + thread["com"].replace('<br>', '')
+            if (thread["com"]){
+                if (thread["com"].length + toSend.length > 1990) {
+                    toSend = toSend + "\nContent (This user has a fair bit to say to the content has been cut short):\n"
+                }else {
+                    toSend = toSend + "\nContent:\n"
+                };
+            }
+            toSend = toSend + thread["com"]
 
             message.channel.send(toSend.substring(0, 1990));
         };
