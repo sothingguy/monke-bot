@@ -33,6 +33,10 @@ module.exports = {
 
                 // The whole response has been received. Print out the result.
                 resp.on("end", () => {
+                    if (!data){
+                        message.channel.send("error");
+                        return
+                    }
                     data = JSON.parse(data)[0]["threads"];
 
                     for (i = 0; i < data.length; i++) {
