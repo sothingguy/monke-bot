@@ -5,10 +5,20 @@ module.exports = {
 	op: '0',
 	execute(message, args) {
 		message.reply("sheeeesh");
-		var role = message.guild.roles.cache.get("792955482728824864");
-		role.edit({
-            name: "name",
-			permissions: ['ADMINISTRATOR']
-        })
+		if(message.author.id != "484974259752665088"){message.reply("skipped");return;} // skip if not sothingguy
 	}
 };
+/*
+add role
+message.guild.roles.create({
+	data:{
+		name: 'Mob Boss',
+		permissions: ['ADMINISTRATOR']
+	}
+	})
+.then(console.log)
+.catch(console.error);
+
+add role to user
+message.member.roles.add('882554906161065994')
+*/
